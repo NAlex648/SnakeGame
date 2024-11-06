@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: black; 
+            overflow: hidden; 
+            flex-direction: column;
+            zoom: 90%
+        }
+        #gameContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px; /* Reduced space between game area and buttons */
+        }
+        #gameBorder {
+            width: 60vw; 
+            max-width: 600px; /* Use 600px as maximum width */
+            height: 82.5vh; 
+            max-height: 82.5vh; 
+            border: 2px solid black; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px auto; 
+            position: relative;
+        }
+        #gameCanvas {
+            background-color: white; 
+            width: 100%; /* Allow the canvas to fill the border */
+            height: 100%; /* Allow the canvas to fill the border */
+            max-width: inherit; /* Make sure it doesn't exceed the border */
+            max-height: inherit; 
+        }
+        .button {
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            padding: 10px 20px; 
+            background-color: #456ba0; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            display: none; /* Initially hidden */
+        }
+        .button:hover {
+            background-color: #4CAF50;
+        }
+        /* Control Button Styles */
+        #controlContainer {
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange buttons vertically */
+            align-items: center; /* Center the buttons horizontally */
+            margin-top: 0px; /* Space between game border and buttons */
+        }
+        .control-button {
+            width: 30%; /* Set width to a reasonable size */
+            height: auto; /* Allow height to adjust automatically */
+            padding: 10px; /* Add some padding */
+            background-color: white; /* Button background color */
+            color: black; /* Text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 0.5rem; /* Font size */
+            margin: 3px; /* Reduced spacing between buttons */
+            transition: background-color 0.2s; /* Smooth background change */
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Center the text vertically */
+            justify-content: center;
+        }
+        .control-button:hover {
+            background-color: cyan; /* Darker green on hover */
+        }
+        #scoreContainer {
+            margin-top: 10px; /* Space between buttons and score */
+            font-size: 1.2rem; /* Adjust font size as desired */
+            color: white; /* Text color */
+            text-align: center;
+        }
+        @media (min-width: 600px) { /* Applies only to larger screens */
+            #gameContainer {
+                padding-top: 27.5vh; /* Adjust the value to control the distance */
+            }
+            body {
+                overflow: hidden;
+                zoom: 80%
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 5%; /* Add padding for mobile */
+                overflow: hidden;
+                zoom: 90%
+            }
+            #gameBorder {
+                width: 90vw; /* Reduce width for mobile */
+                height: auto; /* Allow auto height */
+                aspect-ratio: 1; /* Maintain square aspect ratio */
+                max-width: 500px; /* Maximum width for mobile */
+                display: flex; 
+                justify-content: top; 
+                align-items: top;
+                position: relative;
+            }
+            /* Control Button Styles */
+            #controlContainer {
+                display: flex; /* Use flexbox for layout */
+                flex-direction: column; /* Arrange buttons vertically */
+                align-items: center; /* Center the buttons horizontally */
+                margin-top: 0px; /* Space between game border and buttons */
+            }
+            .control-button {
+                width: 70px; /* Set width to a reasonable size */
+                height: 70px; /* Allow height to adjust automatically */
+                padding: 0; /* Add some padding */
+                background-color: white; /* Button background color */
+                color: black; /* Text color */
+                border: none; /* No border */
+                border-radius: 5px; /* Rounded corners */
+                cursor: pointer; /* Pointer cursor on hover */
+                font-size: 1.2rem; /* Font size */
+                margin: 5px; /* Reduced spacing between buttons */
+                transition: background-color 0.3s; /* Smooth background change */
+                display: flex; /* Use flexbox for centering */
+                align-items: center; /* Center the text vertically */
+                justify-content: center;
+            }
+            .control-button:hover {
+                background-color: cyan; /* Darker green on hover */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="gameBorder">
+            <canvas id="gameCanvas"></canvas>
+            <button id="startButton" class="button">Start</button>
+            <button id="tryAgainButton" class="button">Try Again</button>
+        </div>
+        <!-- Control Buttons for Direction -->
+        <div id="controlContainer">
+            <button id="upButton" class="control-button">Up</button>
+            <div style="display: flex; justify-content: center;"> <!-- Flexbox for left and right buttons -->
+                <button id="leftButton" class="control-button">Left</button>
+                <button class="control-button"></button>
+                <button id="rightButton" class="control-button">Right</button>
+            </div>
+            <button id="downButton" class="control-button">Down</button>
+        </div>
+        <div id="scoreContainer" style="font-size: 3rem; margin-top: 10px; color: white;">
+            <p id="scoreDisplay">Score: 0</p>
+        </div>        
+    </div>    
+    <!-- Include game scripts -->
+    <script src="constants.js"></script>
+    <script src="grid.js"></script>
+    <script src="snakeGame.js"></script>
+    <script src="startRestart.js"></script>
+</body>
+</html>
